@@ -25,4 +25,14 @@ class PostController extends Controller
         $post->save();
         return redirect()->route('posts.index');
     }
+
+    public function edit(Post $post){
+        $categories = Category::all();
+        return view('posts.edit', compact('post', 'categories'));
+    }
+
+    public function update(PostRequest $request, Post $post){
+        $post->fill($request['post'])->save();
+        return redirect()->route('posts.index');
+    }
 }
