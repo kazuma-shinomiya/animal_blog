@@ -35,4 +35,9 @@ class PostController extends Controller
         $post->fill($request['post'])->save();
         return redirect()->route('posts.index');
     }
+
+    public function destroy(Post $post){
+        $post->delete();
+        return redirect()->route('posts.index');
+    }
 }
