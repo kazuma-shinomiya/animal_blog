@@ -9,6 +9,10 @@ use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
+    public function __construct(){
+        $this->authorizeResource(Post::class, 'post');
+    }
+
     public function index(){
         $posts = Post::all()->sortByDesc('created_at');
         return view('posts.index', compact('posts'));
