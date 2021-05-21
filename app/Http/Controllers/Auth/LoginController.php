@@ -9,10 +9,8 @@ use Illuminate\Foundation\Auth\AuthenticatesUsers;
 class LoginController extends Controller
 {
     use AuthenticatesUsers;
-    public function redirectPath()
-    {
-        return '/';
-    }
+    
+    protected $redirectTo = '/';
 
     /**
      * Create a new controller instance.
