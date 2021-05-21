@@ -44,4 +44,15 @@ class PostController extends Controller
         $post->delete();
         return redirect()->route('posts.index');
     }
+
+    public function like(Request $request, Post $post){
+        $post->likes()->detach($request->user()->id);
+        $post->likes()->attach($request->user()->id);
+        return redirect()->route('posts.index');
+    }
+
+    public function unlike(Request $request, Post $post){
+        $post->likes()->detach($request->user()->id);
+        return redirect()->route('posts.index');
+    }
 }
