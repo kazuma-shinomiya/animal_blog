@@ -32,4 +32,12 @@ class Post extends Model
             return false;
         }
     }
+
+    public function scopeCategoryAt($query, $category_id){
+        if (empty($category_id)) {
+            return;
+        }
+        
+        return $query->where('category_id', $category_id);
+    }
 }

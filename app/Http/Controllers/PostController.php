@@ -13,14 +13,15 @@ class PostController extends Controller
         $this->authorizeResource(Post::class, 'post');
     }
 
-    public function index(){
-        $posts = Post::all()->sortByDesc('created_at');
+    public function index(Request $request){
+        $categories = Category::all();
+        $category_id = $request->category_id;
+        $posts = Post::orderBy('created_at', 'asc')->categoryAt($category_id)->get();
         return view('posts.index', compact('posts'));
     }
 
     public function create(){
-        $categories = Category::all();
-        return view('posts.create', compact('categories'));
+        return view('posts.create');
     }
 
     public function store(PostRequest $request, Post $post){
@@ -31,8 +32,7 @@ class PostController extends Controller
     }
 
     public function edit(Post $post){
-        $categories = Category::all();
-        return view('posts.edit', compact('post', 'categories'));
+        return view('posts.edit', compact('post'));
     }
 
     public function update(PostRequest $request, Post $post){
