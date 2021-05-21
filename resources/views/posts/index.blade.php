@@ -12,6 +12,23 @@
               <p>{{ $post->body }}</p>
               <p>{{ $post->category->name }}</p>
             </div>
+            <div>
+              @if($post->isLikedBy(Auth::user()))
+                <a href="{{ route('posts.unlike', $post) }}" class="btn btn-success btn-sm">
+                  いいね
+                  <span class="badge">
+                    {{ $post->likes()->count() }}
+                  </span>
+                </a>
+              @else
+                <a href="{{ route('posts.like', $post) }}" class="btn btn-secondary btn-sm">
+                  いいね
+                  <span class="badge">
+                    {{ $post->likes()->count() }}
+                  </span>
+                </a>
+              @endif
+            </div>
             @if(Auth::id() == $post->user_id)
               <div class="btn-group">
                 <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

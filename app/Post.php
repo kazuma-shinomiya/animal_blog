@@ -3,7 +3,6 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Post extends Model
 {
@@ -14,13 +13,23 @@ class Post extends Model
         'category_id'
     ];
 
-    public function user(): BelongsTo
-    {
+    public function user(){
         return $this->belongsTo('App\User');
     }
 
-    public function category(): BelongsTo
-    {
+    public function category(){
         return $this->belongsTo('App\Category');
+    }
+
+    public function likes(){
+        return $this->belongsToMany('App\User', 'likes')->withTimestamps();
+    }
+
+    public function isLikedBy(?User $user){
+        if($user){
+            return (bool)$this->likes->where('id', $user->id)->count();
+        }else{
+            return false;
+        }
     }
 }
