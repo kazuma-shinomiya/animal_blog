@@ -7,6 +7,9 @@
       @foreach($posts as $post)
         <div class="col-lg-4">
           <div class="card mt-4">
+            <div>
+              <a href="{{ route('users.show', ['name' => $post->user->name])}}" class="text-dark">{{ $post->user->name }}</a>
+            </div>
             <img src="https://mdbootstrap.com/img/new/standard/nature/184.jpg" class="card-img-top" alt="..."/>
             <div class="card-body">
               <p>{{ $post->title }}</p>
