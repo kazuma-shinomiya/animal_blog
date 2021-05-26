@@ -9,8 +9,14 @@ class UserController extends Controller
 {
     public function show(string $name){
         $user = User::where('name', $name)->first();
+        $posts = $user->posts->sortByDesc('created_at');
+        return view('users.show', compact('user', 'posts'));
+    }
 
-        return view('users.show', compact('user'));
+    public function likes(string $name){
+        $user = User::where('name', $name)->first();
+        $posts = $user->likes->sortByDesc('created_at');
+        return view('users.likes', compact('user', 'posts'));
     }
 
     public function follow(Request $request, string $name){
@@ -36,5 +42,17 @@ class UserController extends Controller
         $request->user()->followings()->detach($user);
 
         return redirect()->route('users.show', $user->name);
+    }
+
+    public function followings(string $name){
+        $user = User::where('name', $name)->first();
+        $followings = $user->followings->sortByDesc('created_at');
+        return view('users.followings', compact('user', 'followings'));
+    }
+
+    public function followers(string $name){
+        $user = User::where('name', $name)->first();
+        $followers = $user->followers->sortByDesc('created_at');
+        return view('users.followers', compact('user', 'followers'));
     }
 }
