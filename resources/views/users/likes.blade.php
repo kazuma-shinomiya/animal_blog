@@ -6,7 +6,7 @@
     @include('layouts.sideMenu')
     <div class="col-lg-9">
       @include('users.user')
-      @include('users.tabs', ['hasPosts' => true, 'hasLikes' => false])
+      @include('users.tabs', ['hasPosts' => false, 'hasLikes' => true])
       <div class="row">
         @foreach($posts as $post)
           <div class="col-lg-6">

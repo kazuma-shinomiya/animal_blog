@@ -42,7 +42,7 @@ class User extends Authenticatable
     }
 
     public function likes(){
-        return $this->hasMany('App\Like');
+        return $this->belongsToMany('App\Post', 'likes')->withTimestamps();
     }
 
     public function followers(){
