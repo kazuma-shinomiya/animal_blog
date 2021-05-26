@@ -25,6 +25,7 @@
       </a>
     @endif
   </div>
+  <a href="{{ route('comments.index', ['post' => $post]) }}">コメント</a>
   @if(Auth::id() == $post->user_id)
     <div class="btn-group">
       <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -32,10 +33,10 @@
       </button>
       <div class="dropdown-menu dropdown-menu-right">
         <a class="dropdown-item" href="{{ route('posts.edit', ['post' => $post]) }}">編集</a>
-        <a class="dropdown-item" data-toggle="modal" data-target="#delete-modal">削除</a>
+        <a class="dropdown-item" data-toggle="modal" data-target="#delete-modal{{ $post->id }}">削除</a>
       </div>
 
-      <div class="modal fade" id="delete-modal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+      <div class="modal fade" id="delete-modal{{ $post->id }}" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
         <div class="modal-dialog">
           <div class="modal-content">
             <form method="POST" action="{{ route('posts.destroy', ['post' => $post]) }}">

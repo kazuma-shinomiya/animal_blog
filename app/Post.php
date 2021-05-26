@@ -25,6 +25,10 @@ class Post extends Model
         return $this->belongsToMany('App\User', 'likes')->withTimestamps();
     }
 
+    public function comments(){
+        return $this->hasMany('App\Comment');
+    }
+
     public function isLikedBy(?User $user){
         if($user){
             return (bool)$this->likes->where('id', $user->id)->count();
