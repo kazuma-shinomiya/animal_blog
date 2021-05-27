@@ -14,9 +14,7 @@ class PostController extends Controller
     }
 
     public function index(Request $request){
-        $categories = Category::all();
-        $category_id = $request->category_id;
-        $posts = Post::orderBy('created_at', 'asc')->categoryAt($category_id)->get();
+        $posts = Post::orderBy('created_at', 'asc')->categoryAt($request->category)->get();
         return view('posts.index', compact('posts'));
     }
 
