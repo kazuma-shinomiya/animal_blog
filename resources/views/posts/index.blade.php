@@ -4,11 +4,16 @@
   <div class="container-fluid">
     <div class="row">
       @include('layouts.sideMenu')
-      @foreach($posts as $post)
-        <div class="col-lg-4">
-          @include('posts.post')
+      <div class="col-lg-9">
+        <div class="row">
+          @foreach($posts as $post)
+            <div class="col-lg-4">
+              @include('posts.post')
+            </div>
+          @endforeach
         </div>
-      @endforeach
+      </div>
     </div>
+    {{ $posts->appends($param)->links() }}
   </div>
 @endsection

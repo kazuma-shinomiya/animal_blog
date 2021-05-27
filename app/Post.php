@@ -44,4 +44,5 @@ class Post extends Model
         
         return $query->where('category_id', $category_id);
     }
+
 }
